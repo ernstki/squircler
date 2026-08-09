@@ -537,11 +537,36 @@
 
             // Try Tauri global shim (no bundler)
             try {
-              if (window.__TAURI__ && window.__TAURI__.dialog && window.__TAURI__.fs) {
+              if (window.__TAURI__ && window.__TAURI__.dialog && window.__TAURI__.fs && window.__TAURI__.path) {
+
+                let fullDefaultPath = 'squircle-image.png';
+                try {
+                  const pathApi = window.__TAURI__.path;
+                  let baseDir;
+
+                  // Try multiple standard directories in case Downloads is missing
+                  const dirsToTry = ['downloadDir', 'desktopDir', 'documentDir', 'pictureDir'];
+                  for (const dirFn of dirsToTry) {
+                    try {
+                      if (typeof pathApi[dirFn] === 'function') {
+                        baseDir = await pathApi[dirFn]();
+                        if (baseDir) break; // Found a valid directory!
+                      }
+                    } catch (e) {
+                      // Ignore and try the next directory
+                    }
+                  }
+
+                  if (baseDir) {
+                    fullDefaultPath = await pathApi.join(baseDir, 'squircle-image.png');
+                  }
+                } catch (e) {
+                  console.warn("Could not resolve standard folders, falling back to default OS behavior", e);
+                }
 
                 // show native Save dialog
                 const saveOptions = {
-                  defaultPath: 'squircle-image.png',
+                  defaultPath: fullDefaultPath,
                   filters: [{ name: 'PNG', extensions: ['png'] }]
                 };
 

@@ -99,7 +99,7 @@ function updateSquircle() {
     const borderRadius = currentRadius + '%';
 
     previewImage.style.borderRadius = borderRadius;
-    
+
     // Use scale to simulate the transparent padding around the image
     // so it doesn't break the border-radius on the image itself.
     const scaleValue = 1 - (currentPadding / 100);
@@ -297,3 +297,61 @@ window.addEventListener('drop', (e) => {
     handleFile(files[0]);
   }
 });
+
+// Tauri Native Drag and Drop Handling
+console.log("Checking for Tauri global:", window.__TAURI__);
+
+if (window.__TAURI__ && window.__TAURI__.event) {
+  console.log("Tauri event API found, registering drag-and-drop listeners...");
+
+  window.__TAURI__.event.listen('tauri://drag-over', () => {
+    uploadArea.classList.add('dragover');
+  });
+
+  window.__TAURI__.event.listen('tauri://drag-leave', () => {
+    uploadArea.classList.remove('dragover');
+  });
+
+  // Note: In Tauri v2, the event is 'tauri://drag-drop'
+  window.__TAURI__.event.listen('tauri://drag-drop', async (e) => {
+    console.log("Tauri drag-drop event fired!", e);
+    uploadArea.classList.remove('dragover');
+
+    const paths = e.payload?.paths || e.payload;
+    if (paths && paths.length > 0) {
+      const filePath = paths[0];
+      console.log("File dropped:", filePath);
+
+      const lowerPath = filePath.toLowerCase();
+      if (!lowerPath.match(/\.(png|jpg|jpeg|webp)$/)) {
+        alert('Please select a valid image file (PNG, JPG, or WebP)');
+        return;
+      }
+
+      try {
+        console.log("Attempting to read file via Tauri FS...");
+        const bytes = await window.__TAURI__.fs.readFile(filePath);
+        console.log("File read successfully, bytes:", bytes.length);
+
+        let mimeType = 'image/png';
+        if (lowerPath.endsWith('.jpg') || lowerPath.endsWith('.jpeg')) mimeType = 'image/jpeg';
+        else if (lowerPath.endsWith('.webp')) mimeType = 'image/webp';
+
+        const blob = new Blob([bytes], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+
+        uploadedImage = new Image();
+        uploadedImage.onload = function() {
+          showPreview();
+          URL.revokeObjectURL(url);
+        };
+        uploadedImage.src = url;
+      } catch (err) {
+        console.error('Failed to read dropped file via Tauri FS:', err);
+        alert('Failed to read the dropped file. Check console for details.');
+      }
+    }
+  });
+} else {
+  console.warn("Tauri global or event API not found. Native drag-and-drop won't work.");
+}

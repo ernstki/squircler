@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "squircler",
-  "version": "0.1.0",
-  "identifier": "net.kernst.squircler",
+  "productName": "Squircler",
+  "version": "1.0.0",
+  "identifier": "io.github.ernstki.squircler",
   "build": {
     "frontendDist": "../src"
   },
@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "squircler",
+        "title": "Squircler",
         "width": 800,
         "height": 600,
         "dragDropEnabled": true

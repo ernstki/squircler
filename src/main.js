@@ -2,6 +2,7 @@
 let uploadedImage = null;
 let currentRadius = 20;
 let currentPadding = 0;
+let originalFilename = 'image';
 
 // DOM elements
 const uploadArea = document.getElementById('uploadArea');
@@ -65,6 +66,11 @@ function handleFile(file) {
         alert('Please select a valid image file (PNG, JPG, or WebP)');
         return;
     }
+
+    // Extract filename without extension
+    const nameParts = file.name.split('.');
+    if (nameParts.length > 1) nameParts.pop();
+    originalFilename = nameParts.join('.') || 'image';
 
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -218,6 +224,8 @@ function downloadImageOld() {
 function downloadImage() {
   if (!uploadedImage) return;
 
+  const outFilename = `${originalFilename}+squircle.png`;
+
   // --- draw to canvas (same logic as before) ---
   const maxSize = 800;
   let { width, height } = uploadedImage;
@@ -258,7 +266,7 @@ function downloadImage() {
     try {
       if (window.__TAURI__ && window.__TAURI__.dialog && window.__TAURI__.fs && window.__TAURI__.path) {
 
-        let fullDefaultPath = 'squircle-image.png';
+        let fullDefaultPath = outFilename;
         try {
           const pathApi = window.__TAURI__.path;
           let baseDir;
@@ -277,7 +285,7 @@ function downloadImage() {
           }
 
           if (baseDir) {
-            fullDefaultPath = await pathApi.join(baseDir, 'squircle-image.png');
+            fullDefaultPath = await pathApi.join(baseDir, outFilename);
           }
         } catch (e) {
           console.warn("Could not resolve standard folders, falling back to default OS behavior", e);
@@ -316,7 +324,7 @@ function downloadImage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'squircle-image.png';
+    a.download = outFilename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -384,6 +392,13 @@ if (window.__TAURI__ && window.__TAURI__.event) {
         alert('Please select a valid image file (PNG, JPG, or WebP)');
         return;
       }
+
+      // Extract filename from path (handles both Windows \ and Unix /)
+      const pathParts = filePath.split(/[/\\]/);
+      const fullName = pathParts.pop();
+      const nameParts = fullName.split('.');
+      if (nameParts.length > 1) nameParts.pop();
+      originalFilename = nameParts.join('.') || 'image';
 
       try {
         console.log("Attempting to read file via Tauri FS...");

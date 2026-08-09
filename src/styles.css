@@ -8,43 +8,31 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #ffffff;
     color: #000000;
-    line-height: 1.6;
+    line-height: 1.4;
+    font-size: 14px;
     min-height: 100vh;
-}
-
-.header {
-    position: sticky;
-    top: 0;
-    background-color: #000000;
-    color: #ffffff;
-    padding: 1rem 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1rem;
+    flex: 1;
+    width: 100%;
 }
 
 .upload-section {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .upload-area {
     border: 2px dashed #e5e5e5;
     border-radius: 12px;
-    padding: 3rem 2rem;
-    margin-bottom: 1.5rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
     cursor: pointer;
     background-color: #fafafa;
@@ -61,14 +49,14 @@ body {
 }
 
 .upload-text {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
     font-weight: 600;
 }
 
 .upload-subtext {
     color: #666666;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .file-input {
@@ -79,11 +67,11 @@ body {
     background-color: #000000;
     color: #ffffff;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 8px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -100,45 +88,45 @@ body {
 }
 
 .btn-large {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: 40px;
     min-width: 120px;
 }
 
 .preview-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .preview-container {
     background-color: #fafafa;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .preview-image {
     max-width: 100%;
-    max-height: 400px;
+    max-height: 120px;
     border-radius: 20px;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .controls-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .control-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .control-label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .slider {
@@ -154,8 +142,8 @@ body {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #000000;
     cursor: pointer;
@@ -167,8 +155,8 @@ body {
 }
 
 .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #000000;
     cursor: pointer;
@@ -185,7 +173,7 @@ body {
 
 .download-section {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .hidden {
@@ -194,14 +182,15 @@ body {
 
 .footer {
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 1rem;
     border-top: 1px solid #e5e5e5;
-    margin-top: 3rem;
+    margin-top: 1rem;
+    background-color: #ffffff;
 }
 
 .footer-text {
     color: #666666;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .footer-link {
@@ -218,46 +207,42 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 1.5rem 1rem;
-    }
-
-    .header h1 {
-        font-size: 1.3rem;
+        padding: 1rem;
     }
 
     .upload-area {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .preview-container {
-        padding: 1.5rem;
+        padding: 1rem;
     }
 
     .preview-image {
-        max-height: 300px;
+        max-height: 200px;
     }
 
     .btn-large {
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 1rem 0.5rem;
+        padding: 0.5rem;
     }
 
     .upload-area {
-        padding: 1.5rem 1rem;
+        padding: 1rem;
     }
 
     .upload-text {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .preview-image {
-        max-height: 250px;
+        max-height: 180px;
     }
 }
 

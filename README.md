@@ -1,7 +1,70 @@
-# Tauri + Vanilla
+# Squircler
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Javascript.
+**Squircler** is a minimal [Tauri][] (v2) wrapper around [azmaldev][]'s
+[squircle-generator][original], which provides a single-binary solution for
+transforming images into squircle shapes.
 
-## Recommended IDE Setup
+Whether you're designing app icons, preparing brand assets, or creating profile
+images, this tool helps you convert any image into a beautifully rounded
+squircle with precision and ease.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+This is a focused utility designed for creators, developers, and designers who
+value speed, control, and clean visuals — without relying on heavy graphic
+design software or sketchy, advertising-laden web apps.
+
+---
+
+## Why Use Squircle Generator?
+
+- No login or sign-up required
+- No watermarks or branding
+- Standalone, offline-capable binary, built for any OS, using your OS's native
+  web view component, _e.g._ `libwebkit2gtk` on Linux
+- Extremely lightweight and fast
+- Download ready-to-use transparent PNGs
+- Ideal for developers, designers, and marketers
+- Open-source; free to tinker with and make it your own
+
+---
+
+## Key Features
+
+- Upload images (JPG, PNG, WebP) with drag-and-drop or click
+- Control padding using a simple, accurate slider
+- Preview the squircle effect in real-time
+- Download the final result as a high-quality PNG
+- Sharp output with smooth curves and accurate alignment
+- Clean, modern UI with zero distractions
+
+---
+
+## Online version
+
+_Original source: [azmaldev/squircle-generator][original]_
+
+There's an online (web app) version available [here][webapp].
+
+---
+
+## Use Cases
+
+- App icon design (Android/iOS or Progressive Web Apps)
+- Profile pictures for social platforms or dashboards
+- Design mockups or branding elements with soft corners
+- Rounded avatars for user interfaces
+- Generating image assets for no-code platforms
+- Quick cropping for portfolios and landing pages
+
+---
+
+## Built By
+
+[@azmaldev][azmaldev] and me. 
+
+> This project is part of a collection of minimalist online tools built for
+> speed, utility, and modern design thinking.
+
+[tauri]: https://tauri.app/
+[azmaldev]: https://github.com/azmaldev
+[original]: https://github.com/azmaldev/squircle-generator
+[webapp]: https://azmaldev.github.io/squircle-generator

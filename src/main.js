@@ -97,10 +97,14 @@ function updateSquircle() {
     if (!uploadedImage) return;
 
     const borderRadius = currentRadius + '%';
-    const padding = currentPadding + '%';
 
     previewImage.style.borderRadius = borderRadius;
-    previewImage.style.padding = padding;
+    
+    // Use scale to simulate the transparent padding around the image
+    // so it doesn't break the border-radius on the image itself.
+    const scaleValue = 1 - (currentPadding / 100);
+    previewImage.style.transform = `scale(${scaleValue})`;
+    previewImage.style.padding = '0';
 }
 
 // Download functionality

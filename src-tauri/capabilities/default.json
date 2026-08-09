@@ -9,8 +9,6 @@
     "dialog:allow-message",
     "dialog:allow-save",
     "dialog:allow-open",
-    "fs:allow-write-file",
-    "fs:allow-download-write",
-    "fs:write-files"
+    "fs:allow-write-file"
   ]
 }

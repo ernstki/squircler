@@ -12,6 +12,7 @@ const controlsSection = document.getElementById('controlsSection');
 const downloadSection = document.getElementById('downloadSection');
 const radiusSlider = document.getElementById('radiusSlider');
 const paddingSlider = document.getElementById('paddingSlider');
+const presetRadios = document.querySelectorAll('input[name="presetMode"]');
 const radiusValue = document.getElementById('radiusValue');
 const paddingValue = document.getElementById('paddingValue');
 const downloadBtn = document.getElementById('downloadBtn');
@@ -27,6 +28,10 @@ fileInput.addEventListener('change', handleFileSelect);
 radiusSlider.addEventListener('input', handleRadiusChange);
 paddingSlider.addEventListener('input', handlePaddingChange);
 downloadBtn.addEventListener('click', downloadImage);
+
+presetRadios.forEach(radio => {
+    radio.addEventListener('change', handlePresetModeChange);
+});
 
 // File upload handlers
 function handleDragOver(e) {
@@ -82,14 +87,62 @@ function showPreview() {
 
 // Control handlers
 function handleRadiusChange(e) {
-    currentRadius = parseInt(e.target.value);
+    currentRadius = parseFloat(e.target.value);
     radiusValue.textContent = currentRadius + '%';
+    
+    // If user manually moves slider, switch radio to Custom
+    const customRadio = document.querySelector('input[name="presetMode"][value="custom"]');
+    if (!customRadio.checked) {
+        customRadio.checked = true;
+    }
+    
     updateSquircle();
 }
 
 function handlePaddingChange(e) {
-    currentPadding = parseInt(e.target.value);
+    currentPadding = parseFloat(e.target.value);
     paddingValue.textContent = currentPadding + '%';
+    
+    // If user manually moves slider, switch radio to Custom
+    const customRadio = document.querySelector('input[name="presetMode"][value="custom"]');
+    if (!customRadio.checked) {
+        customRadio.checked = true;
+    }
+    
+    updateSquircle();
+}
+
+function handlePresetModeChange(e) {
+    const mode = e.target.value;
+    if (mode === 'linux') {
+        radiusSlider.disabled = true;
+        paddingSlider.disabled = true;
+        setRadiusValue(20);
+        setPaddingValue(10);
+    } else if (mode === 'macos') {
+        radiusSlider.disabled = true;
+        paddingSlider.disabled = true;
+        setRadiusValue(22.5);
+        setPaddingValue(12.5);
+    } else {
+        radiusSlider.disabled = false;
+        paddingSlider.disabled = false;
+        setRadiusValue(parseFloat(radiusSlider.value));
+        setPaddingValue(parseFloat(paddingSlider.value));
+    }
+}
+
+function setRadiusValue(val) {
+    currentRadius = val;
+    radiusSlider.value = val;
+    radiusValue.textContent = val + '%';
+    updateSquircle();
+}
+
+function setPaddingValue(val) {
+    currentPadding = val;
+    paddingSlider.value = val;
+    paddingValue.textContent = val + '%';
     updateSquircle();
 }
 

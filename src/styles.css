@@ -129,6 +129,22 @@ body {
     font-size: 0.9rem;
 }
 
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.radio-label {
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: normal;
+}
+
 .slider {
     width: 100%;
     height: 6px;
@@ -162,6 +178,19 @@ body {
     cursor: pointer;
     border: none;
     transition: all 0.3s ease;
+}
+
+.slider:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slider:disabled::-webkit-slider-thumb {
+    cursor: not-allowed;
+}
+
+.slider:disabled::-moz-range-thumb {
+    cursor: not-allowed;
 }
 
 .slider-value {

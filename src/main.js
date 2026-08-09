@@ -89,31 +89,35 @@ function showPreview() {
 function handleRadiusChange(e) {
     currentRadius = parseFloat(e.target.value);
     radiusValue.textContent = currentRadius + '%';
-    
+
     // If user manually moves slider, switch radio to Custom
     const customRadio = document.querySelector('input[name="presetMode"][value="custom"]');
     if (!customRadio.checked) {
         customRadio.checked = true;
+        localStorage.setItem('squirclePreset', 'custom');
     }
-    
+
     updateSquircle();
 }
 
 function handlePaddingChange(e) {
     currentPadding = parseFloat(e.target.value);
     paddingValue.textContent = currentPadding + '%';
-    
+
     // If user manually moves slider, switch radio to Custom
     const customRadio = document.querySelector('input[name="presetMode"][value="custom"]');
     if (!customRadio.checked) {
         customRadio.checked = true;
+        localStorage.setItem('squirclePreset', 'custom');
     }
-    
+
     updateSquircle();
 }
 
 function handlePresetModeChange(e) {
     const mode = e.target.value;
+    localStorage.setItem('squirclePreset', mode);
+
     if (mode === 'linux') {
         radiusSlider.disabled = true;
         paddingSlider.disabled = true;
@@ -408,3 +412,15 @@ if (window.__TAURI__ && window.__TAURI__.event) {
 } else {
   console.warn("Tauri global or event API not found. Native drag-and-drop won't work.");
 }
+
+// Load saved preset on startup
+window.addEventListener('DOMContentLoaded', () => {
+    const savedPreset = localStorage.getItem('squirclePreset');
+    if (savedPreset) {
+        const radio = document.querySelector(`input[name="presetMode"][value="${savedPreset}"]`);
+        if (radio) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('change')); // Trigger the update
+        }
+    }
+});

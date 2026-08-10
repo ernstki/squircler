@@ -27,6 +27,7 @@ ifdef BUMP
 	npm version $$newver --no-git-tag-version && \
 	$(call UPDATEJSONVERSION,$$newver,src-tauri/tauri.conf.json) && \
 	$(call UPDATETOMLVERSION,$$newver,src-tauri/Cargo.toml) && \
+	cargo update --workspace && \
 	$(call MAYBEDRYRUN,git add .) && \
 	$(call MAYBEDRYRUN,git commit -em "Release v$$newver") && \
 	$(call MAYBEDRYRUN,git tag v$$newver)
@@ -36,6 +37,7 @@ ifdef NEWVERSION
 	@npm version $(NEWVERSION) --no-git-tag-version
 	@$(call UPDATEJSONVERSION,$$newver,src-tauri/tauri.conf.json) && \
 	$(call UPDATETOMLVERSION,$$newver,src-tauri/Cargo.toml) && \
+	cargo update --workspace && \
 	$(call MAYBEDRYRUN,git add .) && \
 	$(call MAYBEDRYRUN,git commit -em "Release v$$newver") && \
 	$(call MAYBEDRYRUN,git tag v$(NEWVERSION))

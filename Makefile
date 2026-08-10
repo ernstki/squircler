@@ -4,13 +4,19 @@ HOMEPAGE = https://github.com/ernstki/squircler
 help:  # prints this help
 	@bash -c "$$AUTOGEN_HELP_BASH" < $(firstword $(MAKEFILE_LIST))
 
-dev:  # runs the app in (autoreload) development mode
+node_modules/.bin/tauri:
+	npm install
+
+dev: node_modules/.bin/tauri icons  # runs the app in (autoreload) development mode
 	npm run tauri dev
 
-icons:  # updates the iconset based on 'img/icon.png'
+icon: icons
+icons: src-tauri/icons/128x128.png  # (alias: icon) updates the iconset based on 'img/icon.png'
+
+src-tauri/icons/128x128.png: node_modules/.bin/tauri img/icon.png
 	npm run tauri icon img/icon.png
 
-build:  # builds the release version of the app (.deb, etc.)
+build: node_modules/.bin/tauri icons  # builds the release version of the app (.deb, etc.)
 	npm run tauri build
 
 release:  # tags a new release [NEWVERSION=x.y.z, BUMP={major,minor,patch}]

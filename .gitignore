@@ -1,4 +1,4 @@
-# Logs
+# lawgs
 logs
 *.log
 npm-debug.log*
@@ -7,19 +7,26 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# build artifacts
+src-tauri/icons
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# editor and IDE detritus
+.*sw?
+*~
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 .aider*
+
+# file manager turds
+.DS_Store
+Thumbs.db

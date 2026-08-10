@@ -7,6 +7,9 @@ help:  # prints this help
 dev:  # runs the app in (autoreload) development mode
 	npm run tauri dev
 
+icons:  # updates the iconset based on 'img/icon.png'
+	npm run tauri icon img/icon.png
+
 build:  # builds the release version of the app (.deb, etc.)
 	npm run tauri build
 
@@ -20,6 +23,8 @@ endif
 ifneq ($(and $(NEWVERSION),$(BUMP)),)
 	$(error Cannot specify NEWVERSION and BUMP at the same time)
 endif
+	# making sure SVGs are clean
+	! ag $(USER)
 ifdef BUMP
 	@# FYI: `npm version` treats x.y.z and `patch` equally, so maybe I can
 	@# simplify this someday…

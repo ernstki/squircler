@@ -1,8 +1,13 @@
 # Squircler
 
-**Squircler** is a minimal [Tauri][] (v2) wrapper around [azmaldev][]'s
-[squircle-generator][original], which provides a single-binary solution for
-transforming images into squircle shapes.
+**Squircler** is an overcomplicated [Tauri][] (v2) wrapper around
+[azmaldev][]'s delightfully minimal [squircle-generator][original] HTML app.
+Thus, in spite of itself, Squircler provides a cross-platform, single-binary
+solution for transforming images into squircle shapes.
+
+<p align="center">
+<a href="img/screenshot.png"><img alt="A screenshot of Squircler" src="img/screenshot.png" width="480" /></a>
+</p>
 
 Whether you're designing app icons, preparing brand assets, or creating profile
 images, this tool helps you convert any image into a beautifully rounded

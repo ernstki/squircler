@@ -46,8 +46,8 @@ endif
 	@printf  "\nNow would be a good time to "; \
 	printf "`tput bold`git push && git push --tags`tput sgr0`!\n\n"
 
-clean:  # cleans generated files (just PNGs for now)
-	-find -name "*.png" -delete
+clean:  # cleans generated files
+	$(info This target is unimplemented, for now.)
 
 
 ##

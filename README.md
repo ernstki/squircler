@@ -64,7 +64,15 @@ There's an online (web app) version available [here][webapp].
 > This project is part of a collection of minimalist online tools built for
 > speed, utility, and modern design thinking.
 
+### Icon credit
+
+Original icon by Kevin Ernst, with help from Gemini 3.5 Flash-Lite for the
+"squircle" SVG geometry, inspiration taken from Daniel Witt's [Squircle Icon
+Maker][dansapp], and many apologies to people who dislike the Ubuntu
+"aubergine" color scheme.
+
 [tauri]: https://tauri.app/
 [azmaldev]: https://github.com/azmaldev
 [original]: https://github.com/azmaldev/squircle-generator
 [webapp]: https://azmaldev.github.io/squircle-generator
+[dansapp]: https://apps.apple.com/us/app/squircle-icon-maker/id6476942163

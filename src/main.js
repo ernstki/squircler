@@ -439,3 +439,15 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Handle Ctrl+Q / Cmd+Q and Ctrl+W / Cmd+W to close the app
+document.addEventListener('keydown', (e) => {
+    const isModifier = e.ctrlKey || e.metaKey;
+
+    if (isModifier && (e.key.toLowerCase() === 'q' || e.key.toLowerCase() === 'w')) {
+        e.preventDefault();
+        if (window.__TAURI__ && window.__TAURI__.window) {
+            window.__TAURI__.window.getCurrentWindow().close();
+        }
+    }
+});

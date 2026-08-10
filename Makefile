@@ -1,8 +1,9 @@
 ##
 ##  Project-related tasks for Squircler; type 'make help' for help
 ##
-##  Author:   Kevin Ernst <ernstki -at- mail.uc.edu>
-##  Date:     9 August 2026
+##  Author:       Kevin Ernst <ernstki -at- mail.uc.edu>
+##  Assisted-by:  Lots of years of writing Makefiles
+##  Date:         9 August 2026
 ##
 
 # uncomment for a different default target when you just run 'make'
@@ -11,14 +12,21 @@
 help:  # prints this help
 	@bash -c "$$AUTOGEN_HELP_BASH" < $(firstword $(MAKEFILE_LIST))
 
-dev:  # runs the app in (autoreload) development mode
+node_modules/.bin/tauri:
+	npm install
+
+dev: node_modules/.bin/tauri icons  # runs the app in (autoreload) development mode
 	npm run tauri dev
 
-icons:  # updates the iconset based on 'img/icon.png'
+build: node_modules/.bin/tauri icons  # builds the release version of the app (.deb, etc.)
+	npm run tauri build
+
+icon: icons
+icons: src-tauri/icons/128x128.png  # (alias: icon) updates the iconset based on 'img/icon.png'
+
+src-tauri/icons/128x128.png: node_modules/.bin/tauri
 	npm run tauri icon img/icon.png
 
-build:  # builds the release version of the app (.deb, etc.)
-	npm run tauri build
 
 release:  # tags a new release [NEWVERSION=x.y.z, BUMP={major,minor,patch}]
 ifneq ($(and $(NEWVERSION),$(BUMP)),)
@@ -62,8 +70,13 @@ endif
 	@printf  "\nNow would be a good time to "; \
 	printf "`tput bold`git push && git push --tags`tput sgr0`!\n\n"
 
-clean:  # cleans generated files
-	$(info This target is unimplemented, for now.)
+clean:  # prunes ‘release’ build deps and entire ‘debug’ build
+	rm -rf src-tauri/target/release/deps
+	rm -rf src-tauri/target/debug
+
+reallyclean: clean  # clean, plus removes *all* build targets and icons
+	rm -rf src-tauri/target
+	rm -rf src-tauri/icons
 
 
 ##

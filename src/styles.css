@@ -215,6 +215,7 @@ body {
     margin-top: 0;
     border-top: 1px solid #e5e5e5;
     background-color: #ffffff;
+    position: relative;
 }
 
 .footer-text {
@@ -231,6 +232,21 @@ body {
 
 .footer-link:hover {
     color: #333333;
+}
+
+.version-text {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: #999999;
+    font-size: 0.75rem;
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+}
+
+.version-text:hover {
+    text-decoration: underline solid;
+    color: #666666;
 }
 
 /* Responsive Design */

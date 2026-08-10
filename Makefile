@@ -1,22 +1,23 @@
-APPNAME = Squircler
-HOMEPAGE = https://github.com/ernstki/squircler
+##
+##  Project-related tasks for Squircler; type 'make help' for help
+##
+##  Author:   Kevin Ernst <ernstki -at- mail.uc.edu>
+##  Date:     9 August 2026
+##
+
+# uncomment for a different default target when you just run 'make'
+#.DEFAULT_GOAL = dev
 
 help:  # prints this help
 	@bash -c "$$AUTOGEN_HELP_BASH" < $(firstword $(MAKEFILE_LIST))
 
-node_modules/.bin/tauri:
-	npm install
-
-dev: node_modules/.bin/tauri icons  # runs the app in (autoreload) development mode
+dev:  # runs the app in (autoreload) development mode
 	npm run tauri dev
 
-icon: icons
-icons: src-tauri/icons/128x128.png  # (alias: icon) updates the iconset based on 'img/icon.png'
-
-src-tauri/icons/128x128.png: node_modules/.bin/tauri img/icon.png
+icons:  # updates the iconset based on 'img/icon.png'
 	npm run tauri icon img/icon.png
 
-build: node_modules/.bin/tauri icons  # builds the release version of the app (.deb, etc.)
+build:  # builds the release version of the app (.deb, etc.)
 	npm run tauri build
 
 release:  # tags a new release [NEWVERSION=x.y.z, BUMP={major,minor,patch}]
@@ -38,7 +39,8 @@ ifdef BUMP
 	npm version $$newver --no-git-tag-version && \
 	$(call UPDATEJSONVERSION,$$newver,src-tauri/tauri.conf.json) && \
 	$(call UPDATETOMLVERSION,$$newver,src-tauri/Cargo.toml) && \
-	cargo update --workspace && \
+	echo "const APP_VERSION = '$$newver';\nconst APP_HOMEPAGE = '$(HOMEPAGE)';" > src/meta.js && \
+	cd src-tauri && cargo update --workspace && cd .. && \
 	$(call MAYBEDRYRUN,git add .) && \
 	$(call MAYBEDRYRUN,git commit -em "Release v$$newver") && \
 	$(call MAYBEDRYRUN,git tag v$$newver)
@@ -48,7 +50,8 @@ ifdef NEWVERSION
 	@npm version $(NEWVERSION) --no-git-tag-version
 	@$(call UPDATEJSONVERSION,$$newver,src-tauri/tauri.conf.json) && \
 	$(call UPDATETOMLVERSION,$$newver,src-tauri/Cargo.toml) && \
-	cargo update --workspace && \
+	echo "const APP_VERSION = '$(NEWVERSION)';\nconst APP_HOMEPAGE = '$(HOMEPAGE)';" > src/meta.js && \
+	cd src-tauri && cargo update --workspace && cd .. && \
 	$(call MAYBEDRYRUN,git add .) && \
 	$(call MAYBEDRYRUN,git commit -em "Release v$$newver") && \
 	$(call MAYBEDRYRUN,git tag v$(NEWVERSION))
@@ -67,6 +70,8 @@ clean:  # cleans generated files
 ##  internals you can safely ignore
 ##
 
+APPNAME := $(shell sed -nE 's/.*"productName":[[:space:]]+"(.*)".*/\1/p' src-tauri/tauri.conf.json)
+HOMEPAGE := $(shell sed -nE 's/.*"homepage":[[:space:]]+"(.*)".*/\1/p' package.json)
 VERSION = $(shell sed -nE 's/.*"version":[[:space:]]+"(.*)".*/\1/p' package.json)
 # this works fine , but relies on having `node` available right out of the gate
 #$(shell node -p 'require("./package.json").version')

@@ -440,6 +440,35 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Fetch and display app version
+window.addEventListener('DOMContentLoaded', async () => {
+    const versionEl = document.getElementById('app-version');
+    if (versionEl) {
+        let ver = typeof APP_VERSION !== 'undefined' ? APP_VERSION : '';
+        
+        if (window.__TAURI__ && window.__TAURI__.app) {
+            try {
+                ver = await window.__TAURI__.app.getVersion();
+            } catch (err) {
+                console.warn("Could not fetch Tauri version", err);
+            }
+        }
+        
+        if (ver) {
+            versionEl.textContent = `v${ver}`;
+            if (typeof APP_HOMEPAGE !== 'undefined' && APP_HOMEPAGE) {
+                versionEl.href = `${APP_HOMEPAGE}/releases/tag/v${ver}`;
+                versionEl.title = versionEl.href;
+            } else {
+                // Remove link behavior/styling if no homepage is defined
+                versionEl.removeAttribute('target');
+                versionEl.style.textDecoration = 'none';
+                versionEl.style.cursor = 'default';
+            }
+        }
+    }
+});
+
 // Handle Ctrl+Q / Cmd+Q and Ctrl+W / Cmd+W to close the app
 document.addEventListener('keydown', (e) => {
     const isModifier = e.ctrlKey || e.metaKey;

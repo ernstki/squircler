@@ -19,7 +19,7 @@ design software or sketchy, advertising-laden web apps.
 
 ---
 
-## Why Use Squircle Generator?
+## Why use Squircler?
 
 - No login or sign-up required
 - No watermarks or branding
@@ -32,7 +32,7 @@ design software or sketchy, advertising-laden web apps.
 
 ---
 
-## Key Features
+## Key features
 
 - Upload images (JPG, PNG, WebP) with drag-and-drop or click
 - Control padding using a simple, accurate slider
@@ -51,7 +51,7 @@ There's an online (web app) version available [here][webapp].
 
 ---
 
-## Use Cases
+## Use cases
 
 - App icon design (Android/iOS or Progressive Web Apps)
 - Profile pictures for social platforms or dashboards
@@ -62,7 +62,7 @@ There's an online (web app) version available [here][webapp].
 
 ---
 
-## Built By
+## Built by
 
 [@azmaldev][azmaldev] and me. 
 
@@ -71,13 +71,14 @@ There's an online (web app) version available [here][webapp].
 
 ### Icon credit
 
-Original icon by Kevin Ernst, with help from Gemini 3.5 Flash-Lite for the
-"squircle" SVG geometry, inspiration taken from Daniel Witt's [Squircle Icon
-Maker][dansapp], and many apologies to people who dislike the Ubuntu
+[Original icon][icon] by Kevin Ernst, with help from Gemini 3.5 Flash-Lite for
+the "squircle" SVG geometry, inspiration taken from Daniel Witt's [Squircle
+Icon Maker][dansapp], and many apologies to people who dislike the Ubuntu
 "aubergine" color scheme.
 
 [tauri]: https://tauri.app/
 [azmaldev]: https://github.com/azmaldev
 [original]: https://github.com/azmaldev/squircle-generator
 [webapp]: https://azmaldev.github.io/squircle-generator
+[icon]: img/icon.svg
 [dansapp]: https://apps.apple.com/us/app/squircle-icon-maker/id6476942163

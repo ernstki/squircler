@@ -1,6 +1,6 @@
 [package]
 name = "squircler"
-version = "1.0.0"
+version = "1.1.0"
 description = "Transform images into squircular icons"
 authors = ["Mahammad Azmal", "Kevin Ernst"]
 edition = "2021"

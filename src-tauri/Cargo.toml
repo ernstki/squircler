@@ -1,8 +1,8 @@
 [package]
 name = "squircler"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "1.0.0"
+description = "Transform images into squircular icons"
+authors = ["Mahammad Azmal", "Kevin Ernst"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

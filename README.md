@@ -1,6 +1,6 @@
 # Squircler
 
-**Squircler** is an overcomplicated [Tauri][] (v2) wrapper around
+**Squircler** is an overly complicated [Tauri][] (v2) wrapper around
 [azmaldev][]'s delightfully minimal [squircle-generator][original] HTML app.
 Thus, in spite of itself, Squircler provides a cross-platform, single-binary
 solution for transforming images into squircle shapes.
@@ -62,23 +62,26 @@ There's an online (web app) version available [here][webapp].
 
 ---
 
-## Built by
+## Credits and license
 
-[@azmaldev][azmaldev] and me. 
+Built by [@azmaldev][azmaldev] and me, with machine assistance. I used
+[Aider][] with the gemini-3.1-pro-preview model for code generation, and
+performed manual reviews of the diffs before committing. Commits which contain
+machine-generated code are credited as such.
 
-> This project is part of a collection of minimalist online tools built for
-> speed, utility, and modern design thinking.
-
-### Icon credit
-
-[Original icon][icon] by Kevin Ernst, with help from Gemini 3.5 Flash-Lite for
-the "squircle" SVG geometry, inspiration taken from Daniel Witt's [Squircle
+[Original icon][icon] by me; inspiration taken from Daniel Witt's [Squircle
 Icon Maker][dansapp], and many apologies to people who dislike the Ubuntu
 "aubergine" color scheme.
 
+The license for this code is [as yet undetermined][license], but obviously no
+warranty is expressed or implied. If this breaks your system, you get to keep
+both pieces.
+
 [tauri]: https://tauri.app/
 [azmaldev]: https://github.com/azmaldev
+[aider]: https://github.com/aider-ai/aider
 [original]: https://github.com/azmaldev/squircle-generator
 [webapp]: https://azmaldev.github.io/squircle-generator
 [icon]: img/icon.svg
 [dansapp]: https://apps.apple.com/us/app/squircle-icon-maker/id6476942163
+[license]: https://github.com/azmaldev/squircle-generator/issues/1
